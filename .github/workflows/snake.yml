@@ -37,7 +37,7 @@ jobs:
           const year = now.getUTCFullYear();
           const from = `${year}-01-01T00:00:00Z`;
           const to = `${year}-12-31T23:59:59Z`;
-          const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday'];
           const fallbackLanguages = [
             { name: 'Python', color: '#3776AB', pct: 40 },
             { name: 'JavaScript', color: '#F7DF1E', pct: 24 },
@@ -193,7 +193,7 @@ jobs:
 
           function boltIcon() {
             return `
-              <g transform="translate(128 16)">
+              <g transform="translate(140 23) scale(0.58)">
                 <path d="M25 0 L7 30 H19 L12 56 L44 18 H28 L36 0 Z" fill="#ffd166" stroke="#fff3b0" stroke-width="1.5" filter="url(#glow)"/>
                 <path d="M25 0 L7 30 H19" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2" fill="none"/>
               </g>`;
@@ -212,22 +212,22 @@ jobs:
 
           function languagePanel(languages) {
             const rows = languages.slice(0, 5).map((language, index) => {
-              const y = 58 + index * 14;
-              const width = Math.max(8, Math.min(152, Math.round(language.pct * 1.52)));
+              const y = 63 + index * 13;
+              const width = Math.max(8, Math.min(140, Math.round(language.pct * 1.4)));
               const label = language.name.length > 12 ? `${language.name.slice(0, 11)}.` : language.name;
               return `
-                <g transform="translate(18 ${y})">
-                  <text x="0" y="0" fill="#d8ffe9" font-size="10.5" font-weight="650">${esc(label)}</text>
-                  <rect x="86" y="-8" width="152" height="8" rx="4" fill="#10291f"/>
-                  <rect x="86" y="-8" width="${width}" height="8" rx="4" fill="${esc(language.color || '#39d98a')}"/>
-                  <text x="250" y="0" fill="#a7c7b5" font-size="10.5" text-anchor="end">${esc(language.pct)}%</text>
+                <g transform="translate(24 ${y})">
+                  <text x="0" y="0" fill="#d8ffe9" font-size="10.2" font-weight="650">${esc(label)}</text>
+                  <rect x="92" y="-7.5" width="140" height="7.5" rx="3.75" fill="#10291f"/>
+                  <rect x="92" y="-7.5" width="${width}" height="7.5" rx="3.75" fill="${esc(language.color || '#39d98a')}"/>
+                  <text x="256" y="0" fill="#a7c7b5" font-size="10.2" text-anchor="end">${esc(language.pct)}%</text>
                 </g>`;
             }).join('');
             return `
               <g transform="translate(570 205)">
-                <rect width="320" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
-                <text x="18" y="24" fill="#8ff0bd" font-size="13" font-weight="800">LANGUAGE MIX</text>
-                <text x="18" y="40" fill="#a7c7b5" font-size="10.5">public repos + project stack</text>
+                <rect width="320" height="126" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
+                <text x="24" y="28" fill="#8ff0bd" font-size="13" font-weight="800">LANGUAGE MIX</text>
+                <text x="24" y="44" fill="#a7c7b5" font-size="10.5">public repos + project stack</text>
                 ${rows}
               </g>`;
           }
@@ -269,11 +269,11 @@ jobs:
                 ${metricCard(420, 84, 'longest streak', `${metrics.longestStreak} days`, 'best public run this year')}
                 ${metricCard(616, 84, 'top stack signal', topLanguage, `${metrics.publicRepos} public repos scanned`)}
                 <g transform="translate(28 205)">
-                  <rect width="500" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
-                  <text x="18" y="30" fill="#8ff0bd" font-size="13" font-weight="700">CONTRIBUTION RHYTHM</text>
-                  <text x="18" y="62" fill="#ffffff" font-size="18" font-weight="800">Peak day: ${esc(metrics.bestDay)} (${esc(metrics.bestDayTotal)} contributions)</text>
-                  <text x="18" y="88" fill="#d8ffe9" font-size="14">Runner-up: ${esc(metrics.secondDay)} (${esc(metrics.secondDayTotal)})</text>
-                  <text x="18" y="108" fill="#a7c7b5" font-size="12">Streaks are computed from the public contribution calendar.</text>
+                  <rect width="500" height="126" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
+                  <text x="24" y="32" fill="#8ff0bd" font-size="13" font-weight="700">CONTRIBUTION RHYTHM</text>
+                  <text x="24" y="64" fill="#ffffff" font-size="18" font-weight="800">Peak day: ${esc(metrics.bestDay)} (${esc(metrics.bestDayTotal)} contributions)</text>
+                  <text x="24" y="91" fill="#d8ffe9" font-size="14">Runner-up: ${esc(metrics.secondDay)} (${esc(metrics.secondDayTotal)})</text>
+                  <text x="24" y="113" fill="#a7c7b5" font-size="12">Streaks are computed from the public contribution calendar.</text>
                 </g>
                 ${languagePanel(metrics.languages)}
               </g>
