@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:0e75b6&height=190&section=header&text=Matias%20Chijani&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Data%20Science%20%7C%20BI%20Development%20%7C%20AI%20Workflows&descAlignY=58&descSize=18" alt="Matias Chijani banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06130f,55:0f5132,100:2ea44f&height=190&section=header&text=Matias%20Chijani&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Data%20Science%20%7C%20BI%20Development%20%7C%20AI%20Workflows&descAlignY=58&descSize=18" alt="Matias Chijani banner" />
 </p>
 
 <p align="center">
@@ -12,6 +12,34 @@
   <a href="mailto:matias.saballa@gmail.com">
     <img src="https://img.shields.io/badge/Email-contact-informational?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
   </a>
+</p>
+
+## Live GitHub metrics
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Matichi/Matichi/output/profile-metrics.svg" alt="Live GitHub metrics stream" />
+</p>
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Matichi&theme=github_dark" alt="GitHub profile details" />
+</p>
+
+<p align="center">
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Matichi&theme=github_dark" alt="GitHub profile stats" />
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Matichi&theme=github_dark&utcOffset=-4" alt="Most productive time" />
+</p>
+
+<p align="center">
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Matichi&theme=github_dark" alt="Repos per language" />
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Matichi&theme=github_dark" alt="Most commit language" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Matichi&theme=github-compact&hide_border=true&area=true" alt="GitHub activity graph" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Matichi/Matichi/output/github-snake-dark.svg" alt="Contribution snake animation" />
 </p>
 
 ---
@@ -99,30 +127,6 @@ Some repositories are private or still in progress, so this table focuses on the
 - Integrated OpenAI text generation into backend services with project context, saved notes, lore, assets and chat history.
 - Implemented concept-art and asset image generation through OpenAI image APIs, including generation, image editing, regeneration, quality options and stored image records.
 - Applied LLM tools to BI and dashboard workflows to support explanation, exploration and decision-making.
-
-## GitHub metrics
-
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Matichi&theme=github_dark" alt="GitHub profile details" />
-</p>
-
-<p align="center">
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Matichi&theme=github_dark" alt="GitHub profile stats" />
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Matichi&theme=github_dark&utcOffset=-4" alt="Most productive time" />
-</p>
-
-<p align="center">
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Matichi&theme=github_dark" alt="Repos per language" />
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Matichi&theme=github_dark" alt="Most commit language" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Matichi&theme=github-compact&hide_border=true&area=true" alt="GitHub activity graph" />
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Matichi/Matichi/output/github-snake-dark.svg" alt="Contribution snake animation" />
-</p>
 
 ## Publications and collaborations
 
