@@ -280,9 +280,15 @@ jobs:
             </svg>`;
           }
 
-          const metrics = await loadMetrics();
-          fs.mkdirSync('dist', { recursive: true });
-          fs.writeFileSync('dist/profile-metrics.svg', render(metrics));
+          loadMetrics()
+            .then((metrics) => {
+              fs.mkdirSync('dist', { recursive: true });
+              fs.writeFileSync('dist/profile-metrics.svg', render(metrics));
+            })
+            .catch((error) => {
+              console.error(error);
+              process.exit(1);
+            });
           NODE
 
       - name: Push output to output branch
