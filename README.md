@@ -1,15 +1,16 @@
-<h1 align="center">Hi, I'm Matias Chijani</h1>
-
 <p align="center">
-  <strong>Data Science | BI Development | Data Analytics | Automation | AI Workflows</strong>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:0e75b6&height=190&section=header&text=Matias%20Chijani&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Data%20Science%20%7C%20BI%20Development%20%7C%20AI%20Workflows&descAlignY=58&descSize=18" alt="Matias Chijani banner" />
 </p>
 
 <p align="center">
   <a href="https://github.com/Matichi">
-    <img src="https://komarev.com/ghpvc/?username=Matichi&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
+    <img src="https://komarev.com/ghpvc/?username=Matichi&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="Profile views" />
+  </a>
+  <a href="https://github.com/Matichi?tab=followers">
+    <img src="https://img.shields.io/github/followers/Matichi?style=for-the-badge&logo=github&label=Followers" alt="GitHub followers" />
   </a>
   <a href="mailto:matias.saballa@gmail.com">
-    <img src="https://img.shields.io/badge/Email-contact-informational?style=flat&logo=gmail&logoColor=white" alt="Email" />
+    <img src="https://img.shields.io/badge/Email-contact-informational?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
   </a>
 </p>
 
@@ -102,16 +103,34 @@ Some repositories are private or still in progress, so this table focuses on the
 ## GitHub metrics
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Matichi&show_icons=true&theme=transparent&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Matichi&layout=compact&theme=transparent&hide_border=true" alt="Top languages" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Matichi&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&rank_icon=github&custom_title=GitHub%20Stats" alt="GitHub stats" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Matichi&layout=compact&theme=github_dark&hide_border=true&langs_count=8" alt="Top languages" />
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Matichi&theme=transparent&hide_border=true" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com?user=Matichi&theme=github-dark-blue&hide_border=true" alt="GitHub streak" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Matichi&theme=github-compact&hide_border=true" alt="GitHub activity graph" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Matichi&theme=github-compact&hide_border=true&area=true" alt="GitHub activity graph" />
+</p>
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Matichi&theme=github_dark" alt="GitHub profile details" />
+</p>
+
+<p align="center">
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Matichi&theme=github_dark" alt="Repos per language" />
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Matichi&theme=github_dark" alt="Most commit language" />
+</p>
+
+<p align="center">
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Matichi&theme=github_dark" alt="GitHub profile stats" />
+  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Matichi&theme=github_dark&utcOffset=-4" alt="Most productive time" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Matichi/Matichi/output/github-snake-dark.svg" alt="Contribution snake animation" />
 </p>
 
 ## Publications and collaborations
