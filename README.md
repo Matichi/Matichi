@@ -103,12 +103,12 @@ Some repositories are private or still in progress, so this table focuses on the
 ## GitHub metrics
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Matichi&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&rank_icon=github&custom_title=GitHub%20Stats" alt="GitHub stats" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Matichi&layout=compact&theme=github_dark&hide_border=true&langs_count=8" alt="Top languages" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Matichi&show_icons=true&theme=dark&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub stats" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Matichi&layout=compact&theme=dark&hide_border=true&langs_count=8" alt="Top languages" />
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Matichi&theme=github-dark-blue&hide_border=true" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com/?user=Matichi&theme=dark&hide_border=true" alt="GitHub streak" />
 </p>
 
 <p align="center">
