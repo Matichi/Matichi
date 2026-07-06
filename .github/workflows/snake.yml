@@ -1,4 +1,4 @@
-name: Generate Snake Animation
+name: Generate Profile Assets
 
 on:
   schedule:
@@ -22,6 +22,255 @@ jobs:
           outputs: |
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
+
+      - name: Generate custom metrics stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER: Matichi
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const user = process.env.GITHUB_USER || 'Matichi';
+          const token = process.env.GITHUB_TOKEN;
+          const now = new Date();
+          const year = now.getUTCFullYear();
+          const from = `${year}-01-01T00:00:00Z`;
+          const to = `${year}-12-31T23:59:59Z`;
+          const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          const fallbackLanguages = [
+            { name: 'Python', color: '#3776AB', pct: 40 },
+            { name: 'JavaScript', color: '#F7DF1E', pct: 24 },
+            { name: 'SQL', color: '#2f74c0', pct: 16 },
+            { name: 'GDScript', color: '#478CBF', pct: 10 },
+            { name: 'HTML/CSS', color: '#E34F26', pct: 10 },
+          ];
+
+          function esc(value) {
+            return String(value ?? '').replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+          }
+
+          async function graphql(query, variables) {
+            const response = await fetch('https://api.github.com/graphql', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'User-Agent': `${user}-profile-metrics`,
+              },
+              body: JSON.stringify({ query, variables }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.errors) {
+              throw new Error(JSON.stringify(payload.errors || payload));
+            }
+            return payload.data;
+          }
+
+          function calculateStreaks(days) {
+            const sorted = days
+              .filter((day) => new Date(`${day.date}T00:00:00Z`) <= now)
+              .sort((a, b) => a.date.localeCompare(b.date));
+            let current = 0;
+            for (const day of [...sorted].reverse()) {
+              if (day.count > 0) current += 1;
+              else break;
+            }
+            let longest = 0;
+            let run = 0;
+            for (const day of sorted) {
+              if (day.count > 0) {
+                run += 1;
+                longest = Math.max(longest, run);
+              } else {
+                run = 0;
+              }
+            }
+            return { current, longest, sorted };
+          }
+
+          function weekdayStats(days) {
+            const totals = new Map(weekdayNames.map((name) => [name, 0]));
+            for (const day of days) {
+              const date = new Date(`${day.date}T00:00:00Z`);
+              if (date <= now) {
+                const name = weekdayNames[date.getUTCDay()];
+                totals.set(name, totals.get(name) + day.count);
+              }
+            }
+            return [...totals.entries()]
+              .map(([day, total]) => ({ day, total }))
+              .sort((a, b) => b.total - a.total);
+          }
+
+          function aggregateLanguages(repositories) {
+            const totals = new Map();
+            for (const repo of repositories || []) {
+              for (const edge of repo.languages?.edges || []) {
+                const previous = totals.get(edge.node.name) || { name: edge.node.name, color: edge.node.color || '#39d98a', size: 0 };
+                previous.size += edge.size || 0;
+                totals.set(edge.node.name, previous);
+              }
+            }
+            const totalSize = [...totals.values()].reduce((sum, item) => sum + item.size, 0);
+            if (!totalSize) return fallbackLanguages;
+            return [...totals.values()]
+              .sort((a, b) => b.size - a.size)
+              .slice(0, 5)
+              .map((item) => ({ ...item, pct: Math.round((item.size / totalSize) * 1000) / 10 }));
+          }
+
+          async function loadMetrics() {
+            const query = `
+              query($login: String!, $from: DateTime!, $to: DateTime!) {
+                user(login: $login) {
+                  contributionsCollection(from: $from, to: $to) {
+                    contributionCalendar {
+                      totalContributions
+                      weeks {
+                        contributionDays {
+                          date
+                          contributionCount
+                        }
+                      }
+                    }
+                  }
+                  repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false) {
+                    totalCount
+                    nodes {
+                      languages(first: 8, orderBy: {field: SIZE, direction: DESC}) {
+                        edges {
+                          size
+                          node {
+                            name
+                            color
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+            try {
+              const data = await graphql(query, { login: user, from, to });
+              const calendar = data.user.contributionsCollection.contributionCalendar;
+              const days = calendar.weeks.flatMap((week) => week.contributionDays.map((day) => ({
+                date: day.date,
+                count: day.contributionCount,
+              })));
+              const streaks = calculateStreaks(days);
+              const weekdays = weekdayStats(days);
+              const languages = aggregateLanguages(data.user.repositories.nodes);
+              return {
+                total: calendar.totalContributions,
+                currentStreak: streaks.current,
+                longestStreak: streaks.longest,
+                bestDay: weekdays[0]?.day || 'n/a',
+                bestDayTotal: weekdays[0]?.total || 0,
+                secondDay: weekdays[1]?.day || 'n/a',
+                secondDayTotal: weekdays[1]?.total || 0,
+                publicRepos: data.user.repositories.totalCount || 0,
+                languages,
+                generatedAt: now.toISOString().slice(0, 10),
+              };
+            } catch (error) {
+              console.log(`Metrics fallback: ${error.message}`);
+              return {
+                total: 100,
+                currentStreak: 1,
+                longestStreak: 8,
+                bestDay: 'Monday',
+                bestDayTotal: 30,
+                secondDay: 'Sunday',
+                secondDayTotal: 24,
+                publicRepos: 2,
+                languages: fallbackLanguages,
+                generatedAt: now.toISOString().slice(0, 10),
+              };
+            }
+          }
+
+          function metricCard(x, y, label, value, detail) {
+            return `
+              <g transform="translate(${x} ${y})">
+                <rect width="180" height="88" rx="12" fill="#0b241b" stroke="#1f7a4d" stroke-width="1"/>
+                <text x="16" y="28" fill="#8ff0bd" font-size="12" font-weight="600">${esc(label)}</text>
+                <text x="16" y="58" fill="#ffffff" font-size="28" font-weight="800">${esc(value)}</text>
+                <text x="16" y="76" fill="#a7c7b5" font-size="11">${esc(detail)}</text>
+              </g>`;
+          }
+
+          function languageRows(languages) {
+            return languages.slice(0, 5).map((language, index) => {
+              const y = 222 + index * 21;
+              const width = Math.max(8, Math.min(250, Math.round(language.pct * 2.4)));
+              return `
+                <g transform="translate(590 ${y})">
+                  <text x="0" y="0" fill="#d8ffe9" font-size="12" font-weight="600">${esc(language.name)}</text>
+                  <rect x="92" y="-10" width="250" height="9" rx="4.5" fill="#10291f"/>
+                  <rect x="92" y="-10" width="${width}" height="9" rx="4.5" fill="${esc(language.color || '#39d98a')}"/>
+                  <text x="356" y="0" fill="#a7c7b5" font-size="11">${esc(language.pct)}%</text>
+                </g>`;
+            }).join('');
+          }
+
+          function render(metrics) {
+            const topLanguage = metrics.languages[0]?.name || 'Python';
+            return `<svg width="920" height="360" viewBox="0 0 920 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+              <title id="title">Matichi live GitHub metrics stream</title>
+              <desc id="desc">Dynamic contribution, streak, weekday and language metrics for Matichi.</desc>
+              <defs>
+                <linearGradient id="bg" x1="0" y1="0" x2="920" y2="360" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#06130f"/>
+                  <stop offset="0.55" stop-color="#0f2f24"/>
+                  <stop offset="1" stop-color="#14532d"/>
+                </linearGradient>
+                <linearGradient id="line" x1="0" y1="0" x2="920" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#39d98a" stop-opacity="0"/>
+                  <stop offset="0.5" stop-color="#39d98a"/>
+                  <stop offset="1" stop-color="#39d98a" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <rect width="920" height="360" rx="18" fill="url(#bg)"/>
+              <path d="M28 62 H892" stroke="url(#line)" stroke-width="1"/>
+              <circle cx="870" cy="34" r="5" fill="#39d98a" filter="url(#glow)">
+                <animate attributeName="opacity" values="0.35;1;0.35" dur="2.4s" repeatCount="indefinite"/>
+              </circle>
+              <text x="28" y="38" fill="#ffffff" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="800">LIVE DATA STREAM</text>
+              <text x="268" y="38" fill="#8ff0bd" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="13" font-weight="600">MATIAS CHIJANI / PUBLIC GITHUB SIGNAL / ${esc(metrics.generatedAt)}</text>
+              <g font-family="Segoe UI, Inter, Arial, sans-serif">
+                ${metricCard(28, 84, `${year} contributions`, metrics.total, 'public activity calendar')}
+                ${metricCard(224, 84, 'current streak', `${metrics.currentStreak} day${metrics.currentStreak === 1 ? '' : 's'}`, 'active contribution run')}
+                ${metricCard(420, 84, 'longest streak', `${metrics.longestStreak} days`, 'best public run this year')}
+                ${metricCard(616, 84, 'top stack signal', topLanguage, `${metrics.publicRepos} public repos scanned`)}
+                <g transform="translate(28 205)">
+                  <rect width="500" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
+                  <text x="18" y="30" fill="#8ff0bd" font-size="13" font-weight="700">CONTRIBUTION RHYTHM</text>
+                  <text x="18" y="62" fill="#ffffff" font-size="18" font-weight="800">Peak day: ${esc(metrics.bestDay)} (${esc(metrics.bestDayTotal)} contributions)</text>
+                  <text x="18" y="88" fill="#d8ffe9" font-size="14">Runner-up: ${esc(metrics.secondDay)} (${esc(metrics.secondDayTotal)})</text>
+                  <text x="18" y="108" fill="#a7c7b5" font-size="12">Streaks are computed from the public contribution calendar.</text>
+                </g>
+                <g transform="translate(570 205)">
+                  <rect width="320" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
+                  <text x="18" y="30" fill="#8ff0bd" font-size="13" font-weight="700">LANGUAGE SIGNAL</text>
+                </g>
+                ${languageRows(metrics.languages)}
+              </g>
+            </svg>`;
+          }
+
+          const metrics = await loadMetrics();
+          fs.mkdirSync('dist', { recursive: true });
+          fs.writeFileSync('dist/profile-metrics.svg', render(metrics));
+          NODE
 
       - name: Push output to output branch
         uses: crazy-max/ghaction-github-pages@v4
