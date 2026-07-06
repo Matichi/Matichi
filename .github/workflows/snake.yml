@@ -191,28 +191,45 @@ jobs:
             }
           }
 
-          function metricCard(x, y, label, value, detail) {
+          function boltIcon() {
+            return `
+              <g transform="translate(128 16)">
+                <path d="M25 0 L7 30 H19 L12 56 L44 18 H28 L36 0 Z" fill="#ffd166" stroke="#fff3b0" stroke-width="1.5" filter="url(#glow)"/>
+                <path d="M25 0 L7 30 H19" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2" fill="none"/>
+              </g>`;
+          }
+
+          function metricCard(x, y, label, value, detail, options = {}) {
             return `
               <g transform="translate(${x} ${y})">
                 <rect width="180" height="88" rx="12" fill="#0b241b" stroke="#1f7a4d" stroke-width="1"/>
                 <text x="16" y="28" fill="#8ff0bd" font-size="12" font-weight="600">${esc(label)}</text>
                 <text x="16" y="58" fill="#ffffff" font-size="28" font-weight="800">${esc(value)}</text>
                 <text x="16" y="76" fill="#a7c7b5" font-size="11">${esc(detail)}</text>
+                ${options.bolt ? boltIcon() : ''}
               </g>`;
           }
 
-          function languageRows(languages) {
-            return languages.slice(0, 5).map((language, index) => {
-              const y = 222 + index * 21;
-              const width = Math.max(8, Math.min(250, Math.round(language.pct * 2.4)));
+          function languagePanel(languages) {
+            const rows = languages.slice(0, 5).map((language, index) => {
+              const y = 58 + index * 14;
+              const width = Math.max(8, Math.min(152, Math.round(language.pct * 1.52)));
+              const label = language.name.length > 12 ? `${language.name.slice(0, 11)}.` : language.name;
               return `
-                <g transform="translate(590 ${y})">
-                  <text x="0" y="0" fill="#d8ffe9" font-size="12" font-weight="600">${esc(language.name)}</text>
-                  <rect x="92" y="-10" width="250" height="9" rx="4.5" fill="#10291f"/>
-                  <rect x="92" y="-10" width="${width}" height="9" rx="4.5" fill="${esc(language.color || '#39d98a')}"/>
-                  <text x="356" y="0" fill="#a7c7b5" font-size="11">${esc(language.pct)}%</text>
+                <g transform="translate(18 ${y})">
+                  <text x="0" y="0" fill="#d8ffe9" font-size="10.5" font-weight="650">${esc(label)}</text>
+                  <rect x="86" y="-8" width="152" height="8" rx="4" fill="#10291f"/>
+                  <rect x="86" y="-8" width="${width}" height="8" rx="4" fill="${esc(language.color || '#39d98a')}"/>
+                  <text x="250" y="0" fill="#a7c7b5" font-size="10.5" text-anchor="end">${esc(language.pct)}%</text>
                 </g>`;
             }).join('');
+            return `
+              <g transform="translate(570 205)">
+                <rect width="320" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
+                <text x="18" y="24" fill="#8ff0bd" font-size="13" font-weight="800">LANGUAGE MIX</text>
+                <text x="18" y="40" fill="#a7c7b5" font-size="10.5">public repos + project stack</text>
+                ${rows}
+              </g>`;
           }
 
           function render(metrics) {
@@ -248,7 +265,7 @@ jobs:
               <text x="268" y="38" fill="#8ff0bd" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="13" font-weight="600">MATIAS CHIJANI / PUBLIC GITHUB SIGNAL / ${esc(metrics.generatedAt)}</text>
               <g font-family="Segoe UI, Inter, Arial, sans-serif">
                 ${metricCard(28, 84, `${year} contributions`, metrics.total, 'public activity calendar')}
-                ${metricCard(224, 84, 'current streak', `${metrics.currentStreak} day${metrics.currentStreak === 1 ? '' : 's'}`, 'active contribution run')}
+                ${metricCard(224, 84, 'current streak', `${metrics.currentStreak} day${metrics.currentStreak === 1 ? '' : 's'}`, 'active contribution run', { bolt: true })}
                 ${metricCard(420, 84, 'longest streak', `${metrics.longestStreak} days`, 'best public run this year')}
                 ${metricCard(616, 84, 'top stack signal', topLanguage, `${metrics.publicRepos} public repos scanned`)}
                 <g transform="translate(28 205)">
@@ -258,11 +275,7 @@ jobs:
                   <text x="18" y="88" fill="#d8ffe9" font-size="14">Runner-up: ${esc(metrics.secondDay)} (${esc(metrics.secondDayTotal)})</text>
                   <text x="18" y="108" fill="#a7c7b5" font-size="12">Streaks are computed from the public contribution calendar.</text>
                 </g>
-                <g transform="translate(570 205)">
-                  <rect width="320" height="116" rx="14" fill="#081c15" stroke="#1f7a4d" stroke-width="1"/>
-                  <text x="18" y="30" fill="#8ff0bd" font-size="13" font-weight="700">LANGUAGE SIGNAL</text>
-                </g>
-                ${languageRows(metrics.languages)}
+                ${languagePanel(metrics.languages)}
               </g>
             </svg>`;
           }
