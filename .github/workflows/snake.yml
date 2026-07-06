@@ -37,7 +37,7 @@ jobs:
           const year = now.getUTCFullYear();
           const from = `${year}-01-01T00:00:00Z`;
           const to = `${year}-12-31T23:59:59Z`;
-          const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday'];
+          const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           const fallbackLanguages = [
             { name: 'Python', color: '#3776AB', pct: 40 },
             { name: 'JavaScript', color: '#F7DF1E', pct: 24 },
