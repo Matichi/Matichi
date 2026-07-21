@@ -21,17 +21,17 @@
 </p>
 
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Matichi&theme=github_dark" alt="GitHub profile details" />
+  <img src="https://raw.githubusercontent.com/Matichi/Matichi/main/profile-summary-card-output/github_dark/0-profile-details.svg" alt="GitHub profile details" />
 </p>
 
 <p align="center">
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Matichi&theme=github_dark" alt="GitHub profile stats" />
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Matichi&theme=github_dark&utcOffset=-4" alt="Most productive time" />
+  <img height="180" src="https://raw.githubusercontent.com/Matichi/Matichi/main/profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub profile stats" />
+  <img height="180" src="https://raw.githubusercontent.com/Matichi/Matichi/main/profile-summary-card-output/github_dark/4-productive-time.svg" alt="Most productive time" />
 </p>
 
 <p align="center">
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Matichi&theme=github_dark" alt="Repos per language" />
-  <img height="180" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Matichi&theme=github_dark" alt="Most commit language" />
+  <img height="180" src="https://raw.githubusercontent.com/Matichi/Matichi/main/profile-summary-card-output/github_dark/1-repos-per-language.svg" alt="Repos per language" />
+  <img height="180" src="https://raw.githubusercontent.com/Matichi/Matichi/main/profile-summary-card-output/github_dark/2-most-commit-language.svg" alt="Most commit language" />
 </p>
 
 <p align="center">

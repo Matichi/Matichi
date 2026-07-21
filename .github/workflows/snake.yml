@@ -23,8 +23,12 @@ jobs:
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
 
+      - name: Normalize generated asset permissions
+        run: sudo chown -R "$(id -u):$(id -g)" dist
+
       - name: Generate custom metrics stream
         env:
+          METRICS_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USER: Matichi
         run: |
@@ -32,7 +36,7 @@ jobs:
           const fs = require('fs');
 
           const user = process.env.GITHUB_USER || 'Matichi';
-          const token = process.env.GITHUB_TOKEN;
+          const token = process.env.METRICS_TOKEN || process.env.GITHUB_TOKEN;
           const now = new Date();
           const year = now.getUTCFullYear();
           const from = `${year}-01-01T00:00:00Z`;
@@ -72,8 +76,13 @@ jobs:
               .filter((day) => new Date(`${day.date}T00:00:00Z`) <= now)
               .sort((a, b) => a.date.localeCompare(b.date));
             let current = 0;
-            for (const day of [...sorted].reverse()) {
-              if (day.count > 0) current += 1;
+            let currentIndex = sorted.length - 1;
+            const today = now.toISOString().slice(0, 10);
+            if (sorted[currentIndex]?.date === today && sorted[currentIndex]?.count === 0) {
+              currentIndex -= 1;
+            }
+            for (; currentIndex >= 0; currentIndex -= 1) {
+              if (sorted[currentIndex].count > 0) current += 1;
               else break;
             }
             let longest = 0;
@@ -175,19 +184,7 @@ jobs:
                 generatedAt: now.toISOString().slice(0, 10),
               };
             } catch (error) {
-              console.log(`Metrics fallback: ${error.message}`);
-              return {
-                total: 100,
-                currentStreak: 1,
-                longestStreak: 8,
-                bestDay: 'Monday',
-                bestDayTotal: 30,
-                secondDay: 'Sunday',
-                secondDayTotal: 24,
-                publicRepos: 2,
-                languages: fallbackLanguages,
-                generatedAt: now.toISOString().slice(0, 10),
-              };
+              throw new Error(`Unable to load GitHub metrics: ${error.message}`);
             }
           }
 
