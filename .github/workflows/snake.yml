@@ -39,10 +39,10 @@ jobs:
           const token = process.env.METRICS_TOKEN || process.env.GITHUB_TOKEN;
           const now = new Date();
           const year = now.getUTCFullYear();
-          const rollingFrom = new Date(now);
-          rollingFrom.setUTCFullYear(rollingFrom.getUTCFullYear() - 1);
-          const from = rollingFrom.toISOString();
-          const to = now.toISOString();
+          const today = now.toISOString().slice(0, 10);
+          const rollingFrom = new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), now.getUTCDate()));
+          const from = rollingFrom.toISOString().slice(0, 10) + 'T00:00:00Z';
+          const to = today + 'T23:59:59Z';
           const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           const fallbackLanguages = [
             { name: 'Python', color: '#3776AB', pct: 40 },
