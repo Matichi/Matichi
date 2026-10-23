@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06130f,55:0f5132,100:2ea44f&height=190&section=header&text=Matias%20Chijani&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Data%20Science%20%7C%20BI%20Development%20%7C%20AI%20Workflows&descAlignY=58&descSize=18" alt="Matias Chijani banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06130f,55:0f5132,100:2ea44f&height=190&section=header&text=Matias%20Chijani&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Applied%20AI%20%7C%20Data%20%26%20Software%20Solutions&descAlignY=58&descSize=18" alt="Matias Chijani banner" />
 </p>
 
 <p align="center">
