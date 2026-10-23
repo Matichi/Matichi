@@ -46,23 +46,20 @@
 
 ## About me
 
-I am a data professional focused on **Business Intelligence, Data Science, automation, ETL, web scraping, dashboard development and AI-assisted products**.
+I am an **Applied AI & Data Solutions Engineer** with an M.Sc. in Astrophysics and 7+ years of experience across data, analytics, automation and software development.
 
-My technical background comes from engineering, astronomy and astrophysics, where I used Python for simulation, scientific analysis, data processing and research collaborations. Today I combine that analytical foundation with BI platforms, cloud services, Python automation and applied AI.
+Originally from Chile and currently based in Osaka, Japan, I combine a scientific approach to problem-solving with end-to-end product delivery—from understanding a need and designing a solution to implementation, deployment and support.
 
-- Based in Santiago, Chile
-- Experienced in BI consulting, analytics, automation and data products
-- Interested in systems that connect data, AI, visualization and product thinking
-- Languages: Spanish native, professional English, intermediate Japanese
+- Focused on connecting business needs with practical data and software solutions
+- Experienced in BI, data automation, analytics and applied AI
+- Languages: native Spanish, professional English, basic Japanese (currently learning)
 
 ## What I work on
 
-- **Dashboards and BI:** Qlik Sense, Power BI, AWS QuickSight and executive reporting.
-- **Data automation:** Python ETL workflows, report automation, validation and data processing.
-- **Data Science:** exploratory analysis, machine learning, simulation and visualization.
-- **Web scraping:** Selenium, Scrapy and BeautifulSoup for monitoring and data extraction.
-- **Cloud and databases:** AWS, Azure, Redshift, SQL, MySQL, PostgreSQL and Supabase.
-- **AI workflows:** OpenAI API integrations, LLM assistants, prompt pipelines and AI-supported dashboards.
+- **BI and analytics:** dashboards, reporting and data products for decision-making.
+- **Data automation:** Python workflows, data extraction, transformation, validation and scheduled processes.
+- **Applied AI:** LLM-powered tools, agents, RAG workflows and AI-assisted product features.
+- **Software products:** APIs and web and mobile applications, from initial design through delivery.
 
 ## Tech stack
 
@@ -108,17 +105,22 @@ My technical background comes from engineering, astronomy and astrophysics, wher
 
 ## Selected GitHub projects
 
-Some repositories are private or still in progress, so this table focuses on the product idea and the documented stack.
+Some repositories are private, under development or hosted under collaborators' accounts. This table focuses on each project's purpose and documented stack. Collaborative work and externally hosted repositories are labeled.
 
 | Project | Description | Stack / tools | AI / API notes |
 | --- | --- | --- | --- |
-| **Pixel Kobo / GameDojo** | Personal videogame development hub for organizing projects, assets, lore, timelines, AI brainstorms and generated GDDs. | Python 3.12, FastAPI, SQLAlchemy, Pydantic, Django, React, Vite, Axios, Lucide, Pipenv | OpenAI API for text agents, brainstorming, GDD support and concept-art workflows. Image generation/editing uses the OpenAI Images API with `gpt-image-2` as default model, PNG output and 1024x1024 generation. |
-| **SideQuestPlanner** | Productivity app to organize companies, groups, projects, milestones and tasks with radial, card and blueprint views. | React, Vite, FastAPI, SQLAlchemy, PostgreSQL, Supabase Auth, S3, Render, Vercel | Primarily a data/productivity system. Good candidate for AI project summaries, task recommendations and planning assistants. |
-| **MatiasChijani** | Public README and portfolio base for my GitHub presence. | Markdown, GitHub Profile README, Shields, GitHub Readme Stats | Uses dynamic GitHub metrics and profile badges. |
-| **AI sandboxes: Chatgpt-test, AIAI, SmartIA** | Experimental spaces for testing AI workflows, assistants and API ideas. | OpenAI / LLM experiments, Python or web tooling depending on prototype | Model and API documentation will be expanded as the projects mature. |
-| **Python-Game** | Python game prototype and learning sandbox. | Python, game logic experiments | AI not documented yet. |
-| **StudioPengasus-Web-Page** | Web presence / landing page work for a game or creative studio brand. | Web frontend stack, HTML/CSS/JavaScript direction | AI not documented yet. |
-| **Godot / Pengent** | Game-development experiments and engine-oriented prototypes. | Godot and game-dev tooling | AI-assisted asset and gameplay workflows are potential future extensions. |
+| [Python-Game](https://github.com/Matichi/Python-Game) | Python videogame prototypes and experiments. | Python, Pygame, Turtle | No AI/API integration documented. |
+| [Proyection](https://github.com/Matichi/Proyection) | BTC/USDT strategy research and backtesting with technical indicators. | Python, MACD, RSI, EMA, historical market data | Uses market-data sources; no LLM/OpenAI integration documented. |
+| [StudioPengasus-Web-Page](https://github.com/Matichi/StudioPengasus-Web-Page) | Responsive website for a videogame and creative-audio studio. | Django, HTML5, CSS3, JavaScript | No external AI integration documented. |
+| [Hoshifin](https://github.com/Matichi/Hoshifin) | Mobile personal-finance app for income, expenses, savings goals, scenarios and currency conversion. | React Native, Expo, Supabase | Supabase-backed; no AI integration documented. |
+| [SideQuestPlanner](https://github.com/Matichi/SideQuestPlanner) | Organizes companies, projects, milestones, tasks and quotation workflows. | React, Vite, FastAPI, SQLAlchemy, PostgreSQL, Supabase Auth, S3 | OpenAI `gpt-4o-mini` and `gpt-4o` for quotation analysis; FX API and private S3 document storage. Credentials stay server-side. |
+| [AIAI](https://github.com/Matichi/AIAI) | Explainable MVP for assessing AI-generated images using visual signals. | FastAPI, image analysis, heuristics, Gradient Boosting | Hybrid heuristics, fingerprint matching and a baseline classifier; no OpenAI API documented. |
+| [SmartIA](https://github.com/Matichi/SmartIA) | Crypto-market pattern explorer with market and news views. | FastAPI, React, Vite, market-data endpoints | Rule-based pattern analysis; no OpenAI/LLM integration documented. |
+| [Pixel Kōbō / GameDojo](https://github.com/Matichi/GameDojo) | Videogame-development hub for projects, assets, lore, timelines, brainstorming and generated design documents. | Python 3.12, FastAPI, SQLAlchemy, Pydantic, Django, React, Vite | OpenAI API for text agents, brainstorming, GDD support and concept-art/image workflows. |
+| [Satoria](https://github.com/Matichi/selecci-n)<br>![Collaborative project](https://img.shields.io/badge/Project-Collaborative-7C3AED?style=flat-square) | Recruitment platform for managing clients, candidates, job openings and hiring workflows. | FastAPI, React, TypeScript, Supabase, LangGraph/LangChain | Configurable OpenAI integration for AI-assisted job-description workflows. Built with my development partner. |
+| [PulseDexV2](https://github.com/Matichi/PulseDexV2) | Fitness-coaching product in development. | React, Vite, TypeScript, Tailwind CSS, FastAPI | Optional OpenAI-powered coach; requires a backend API key. |
+| [Financio Flow](https://github.com/Bamuve98/financio-flow)<br>![External repository](https://img.shields.io/badge/Repository-External-lightgrey?style=flat-square) | Mobile personal-finance app for wallets, transactions, credit cards and installments. | React Native, Expo, TypeScript, Supabase | No AI integration documented. Repository hosted under Bamuve98's account. |
+| [MealDex](https://github.com/astroandrodev-art/MealDex)<br>![Collaborative project](https://img.shields.io/badge/Project-Collaborative-7C3AED?style=flat-square) ![External repository](https://img.shields.io/badge/Repository-External-lightgrey?style=flat-square) | Nutrition app for meal tracking, daily goals and nutrition insights. | React Native, Expo, FastAPI, Supabase | AI-assisted photo recognition is described; the provider/model is not specified in the README. Developed collaboratively; repository hosted under another account. |
 
 ## OpenAI and AI work
 
@@ -139,6 +141,7 @@ Some repositories are private or still in progress, so this table focuses on the
 ## Contact
 
 - GitHub: [@Matichi](https://github.com/Matichi)
+- LinkedIn: [matias-chijani](https://linkedin.com/in/matias-chijani-2a5b15192)
 - Email: [matias.saballa@gmail.com](mailto:matias.saballa@gmail.com)
 
 ---
@@ -146,3 +149,4 @@ Some repositories are private or still in progress, so this table focuses on the
 <p align="center">
   <strong>Data, automation and applied AI for useful, measurable and scalable products.</strong>
 </p>
+
